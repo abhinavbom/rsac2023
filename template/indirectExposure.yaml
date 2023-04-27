@@ -131,7 +131,7 @@ Resources:
                       return response.text
                   except Exception as e:
                       return str(e), 500
-              return 'Usage: /fetch?url=http://example.com', 400
+              return 'Welcome to RSAC Learning Lab, Usage -> /fetch?url=http://example.com', 400
 
           if __name__ == '__main__':
               app.run(host='0.0.0.0', port=80)
