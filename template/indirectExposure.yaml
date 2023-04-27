@@ -143,3 +143,6 @@ Outputs:
   InstancePublicIp:
     Description: The public IP address of the EC2 instance
     Value: !GetAtt EC2Instance.PublicIp
+  BucketName:
+    Description: The name of the created S3 bucket.
+    Value: !Ref S3Bucket
