@@ -47,3 +47,4 @@ Outputs:
   SecurityGroupID:
     Description: The Security Group ID for the RDS instance
     Value: !Ref RDSSecurityGroup
+
