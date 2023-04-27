@@ -1,0 +1,21 @@
+Jonny Depp	202-33-1121	Sunnyvale	94086
+Jonn Depp	203-33-1122	Sunnyvale	94086
+Jon Depp		204-33-1123	Sunnyvale	94086
+
+814-441-1234
+
+814-441-4321
+
+abc@asdf.com 
+
+
+abc.gmail.com 
+
+
+ Michael Jordan,  Bill Gates
+
+Michael's address is 12345 ABC Street, Fremont, CA 94539
+
+Bill's address is 948 AAA CT, San Jose, CA 94123
+
+
