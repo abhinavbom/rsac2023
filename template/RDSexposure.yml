@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AWS CloudFormation Template to create a publicly accessible RDS MySQL instance and take a snapshot'
+
+Parameters:
+  DBUsername:
+    Description: "MySQL database username"
+    Type: String
+    Default: "yourusername"
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+
+  DBPassword:
+    Description: "MySQL database password"
+    Type: String
+    NoEcho: true
+    Default: "yourpassword"
+
+Resources:
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable MySQL access from the internet
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+
+  MySQLRDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: '20'
+      DBInstanceClass: db.t2.micro
+      Engine: MySQL
+      EngineVersion: '8.0'
+      MasterUsername: !Ref DBUsername
+      MasterUserPassword: !Ref DBPassword
+      VPCSecurityGroups:
+        - Fn::GetAtt: [RDSSecurityGroup, GroupId]
+      PubliclyAccessible: true
+
+
+Outputs:
+  RDSInstanceEndpoint:
+    Description: The RDS instance endpoint
+    Value: !GetAtt MySQLRDSInstance.Endpoint.Address
+
+  SecurityGroupID:
+    Description: The Security Group ID for the RDS instance
+    Value: !Ref RDSSecurityGroup
